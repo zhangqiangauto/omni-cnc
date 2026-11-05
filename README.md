@@ -1,260 +1,305 @@
 # Omni CNC
 
-欢迎数控、自动化和 DIY 爱好者体验与交流！
+English | [简体中文](README.zh-CN.md)
 
-Omni CNC 是面向数控学习、仿真和研究的控制软件。本仓库用于发布
-Debian / Ubuntu DEB 安装包、版本说明和使用指引，用户无需自行编译。
-可下载的安装包、支持平台及已知问题，以对应版本的发布说明为准。
+Welcome, CNC, automation, and DIY enthusiasts!
+
+Omni CNC is control software for CNC learning, simulation, and research. This
+repository distributes Debian / Ubuntu DEB packages, release notes, and usage
+guides, so users do not need to build the software themselves. Available packages,
+supported platforms, and known issues are documented in the corresponding release notes.
 
 > [!WARNING]
-> **当前项目处于开发阶段，仅供学习、研究和 SIM 仿真，严禁连接实机，严禁用于实际加工或生产。**
+> **This project is under development and is intended only for learning, research, and SIM simulation. Connecting it to real machinery or using it for actual machining or production is strictly prohibited.**
 >
-> 软件尚未完成实机安全与可靠性验证，可能存在控制异常、程序错误和数据丢失等问题。
-> 请保持与真实机床、伺服驱动、主轴及危险输出设备物理断开，不要执行实机点动、回零、试切或加工。
-> **违反上述限制擅自使用，造成的人身伤害、设备损坏、财产损失、数据丢失及其他后果，由使用者自行承担。**
-> 仿真正常、配置校验通过或周期抖动达到建议值，均不代表可以连接实机。
+> The software has not completed safety and reliability validation on real machinery.
+> Control failures, software errors, and data loss may occur. Keep it physically
+> disconnected from real machine tools, servo drives, spindles, and hazardous output
+> devices. Do not perform real-machine jogging, homing, test cuts, or machining.
+> **Anyone who uses the software in violation of these restrictions assumes responsibility for resulting personal injury, equipment damage, property loss, data loss, and other consequences.**
+> Successful simulation, passing configuration checks, or meeting the recommended
+> cycle-jitter target does not mean that connecting real machinery is permitted.
 
-## 功能概览
+## Features
 
-当前开发版本可在 SIM 模式下体验以下功能，具体支持范围以对应发布版本为准。
+The current development version provides the following features in SIM mode.
+Exact availability depends on the release.
 
-| 功能 | 说明 |
+| Feature | Description |
 | --- | --- |
-| 程序与轨迹 | G-code 程序加载、轨迹预览、仿真执行和运行状态显示 |
-| 多轴仿真 | 多轴运动、运动学配置与轨迹规划，包含五轴相关功能 |
-| 操作界面 | 本地 Qt 界面与 Web 界面，显示坐标、程序、报警和设备状态 |
-| 系统配置 | 图形化配置向导，用于选择平台、机型及配置轴、IO 等参数 |
-| 刀具管理 | 刀具配置、使用记录与寿命信息 |
-| 监视与诊断 | 运行监视、报警、系统事件和操作记录 |
-| CAM 辅助编程 | 端面、孔加工、螺纹孔、图像/草图/SVG 转程序、切向切割和搅拌摩擦焊切向跟随等模块 |
+| Programs and toolpaths | G-code loading, toolpath preview, simulated execution, and execution status |
+| Multi-axis simulation | Multi-axis motion, kinematics configuration, and trajectory planning, including five-axis features |
+| User interfaces | Local Qt and Web interfaces displaying coordinates, programs, alarms, and device status |
+| System configuration | A graphical wizard for selecting the platform and machine type and configuring axes, I/O, and other parameters |
+| Tool management | Tool configuration, usage records, and tool-life information |
+| Monitoring and diagnostics | Runtime monitoring, alarms, system events, and operation records |
+| CAM-assisted programming | Facing, hole machining, threaded holes, image/sketch/SVG-to-program conversion, tangential cutting, and tangential following for friction stir welding |
 
-G-code 指令支持范围、CAM 可用模块及各功能限制，请查看对应版本说明。
+See the corresponding release notes for supported G-code commands, available CAM
+modules, and feature limitations.
 
-## 界面截图
+## Screenshots
 
-以下为开发版本的界面示例，布局、名称和可用功能以对应发布版本为准。
+These screenshots show a development version. Layouts, labels, and available
+features depend on the release.
 
-### 初始化与系统配置
+### Initialization and system configuration
 
-选择装机模板、平台与 SIM 后端，查看配置校验结果。
+Select an installation template, platform, and SIM backend, then review the
+configuration validation results.
 
-![初始化与系统配置界面，启动后端选择 SIM](doc/setup-wizard.png)
+![Initialization and system configuration with the SIM backend selected](doc/setup-wizard.png)
 
-### Qt 操作界面
+### Qt interface
 
-本地界面集中显示坐标、运行状态、程序文件和三维轨迹预览。图中使用 SIM 后端。
+The local interface displays coordinates, execution status, program files, and a
+3D toolpath preview. The screenshot uses the SIM backend.
 
-![Qt 操作界面：SIM 状态、坐标和三维轨迹预览](doc/1.png)
+![Qt interface showing SIM status, coordinates, and a 3D toolpath preview](doc/1.png)
 
-### CAM 工具箱
+### CAM toolbox
 
-从工具箱选择辅助编程模块。截图中标为“预告即将面世”的项目尚未开放，实际可用模块以发布说明为准。
+Select an assisted-programming module from the toolbox. Items marked as coming
+soon (预告即将面世) are not yet available. See the release notes for available modules.
 
-![CAM 增值工具箱与辅助编程模块入口](doc/2.png)
+![CAM toolbox and assisted-programming modules](doc/2.png)
 
-### Web 操作界面
+### Web interface
 
-通过浏览器查看坐标、任务摘要和报警，并使用相应操作入口。图中执行后端为 SIM。
-本机默认地址为 [http://127.0.0.1:8080](http://127.0.0.1:8080)，其他设备访问方式见下方“Web 访问”一节。
+View coordinates, task summaries, and alarms in a browser and access the available
+controls. The screenshot uses the SIM execution backend. The default local address
+is [http://127.0.0.1:8080](http://127.0.0.1:8080). See “Web access” below for access
+from other devices.
 
-![Web 操作界面：SIM 状态、坐标、任务摘要和操作面板](doc/Screenshot%202026-10-27%20at%2018.31.49.png)
+![Web interface showing SIM status, coordinates, task summary, and controls](doc/Screenshot%202026-10-27%20at%2018.31.49.png)
 
-## 硬件要求
+## Hardware requirements
 
-| 项目 | 要求或建议 |
+| Item | Requirement or recommendation |
 | --- | --- |
-| CPU 架构 | 64 位 x86（`amd64`）或 64 位 ARM（`arm64`），须有匹配的安装包 |
-| x86 CPU | 当前通用 x86 配置要求至少 4 个逻辑 CPU |
-| ARM 平台 | 已有 RK3588 / Orange Pi 5 Plus 平台配置，需使用匹配板卡的系统镜像与安装包 |
-| 内存 | 体验配置参考 8 GB；复杂预览、大程序或视觉处理需要预留更多内存 |
-| 存储 | 建议使用 SSD，预留约 20 GB 可用空间用于软件、版本副本、程序和日志 |
-| 显示 | Linux 图形桌面、可用的 Qt / OpenGL 驱动；建议分辨率 1920 × 1080 |
-| 输入设备 | 鼠标和键盘；触摸屏兼容性需按设备确认 |
+| CPU architecture | 64-bit x86 (`amd64`) or 64-bit ARM (`arm64`), with a matching installation package |
+| x86 CPU | The current generic x86 configuration requires at least 4 logical CPUs |
+| ARM platform | RK3588 / Orange Pi 5 Plus platform configurations are available; use an OS image and package matching the board |
+| Memory | 8 GB as a reference configuration; allow more for complex previews, large programs, or vision processing |
+| Storage | An SSD is recommended, with approximately 20 GB free for software, release copies, programs, and logs |
+| Display | A Linux graphical desktop and working Qt / OpenGL drivers; 1920 × 1080 recommended |
+| Input devices | Mouse and keyboard; touchscreen compatibility must be checked for each device |
 
-内存与存储数值是配置参考，尚未作为实测最低配置发布。
-CPU 型号和核心数量不能单独保证周期抖动表现。当前体验不需要连接真实机床或总线从站。
+Memory and storage figures are configuration guidance, not published, measured
+minimum requirements. CPU model and core count alone do not guarantee cycle-jitter
+performance. No real machine or fieldbus slaves need to be connected for evaluation.
 
-## 系统与依赖要求
+## Operating system and dependencies
 
-### 系统选择
+### Choosing an operating system
 
-**推荐先安装 LinuxCNC 官方 PREEMPT-RT 镜像系统，再安装 Omni CNC。**
+**We recommend installing an official LinuxCNC PREEMPT-RT OS image before installing Omni CNC.**
 
-- [LinuxCNC 官方下载页](https://linuxcnc.org/downloads/)
-- [LinuxCNC 官方安装文档](https://linuxcnc.org/docs/html/getting-started/getting-linuxcnc.html)
+- [Official LinuxCNC downloads](https://linuxcnc.org/downloads/)
+- [Official LinuxCNC installation documentation](https://linuxcnc.org/docs/html/getting-started/getting-linuxcnc.html)
 
-选择与硬件及 Omni CNC 安装包匹配的镜像，按官方说明安装到磁盘后进入图形桌面。
-安装系统前请备份磁盘上的个人资料。这里只推荐完整镜像系统，单独安装 LinuxCNC 软件包不等于安装镜像系统。
+Choose an image matching your hardware and Omni CNC package, follow the official
+instructions to install it to disk, and log into the graphical desktop. Back up
+personal files before installing the OS. This recommendation refers to the complete
+OS image; installing the LinuxCNC software package alone is not equivalent.
 
-也可使用自行准备的兼容 Debian / Ubuntu 系统，但环境适配和周期抖动问题需自行解决。
-**建议实际负载下的周期抖动小于 50 μs（微秒）**，评估时关注最大观测值。
-LinuxCNC 镜像不能保证所有硬件都达到该目标，此数值也不是实机安全验收标准。
+You may also prepare a compatible Debian / Ubuntu system yourself, but you will
+need to resolve environment compatibility and cycle-jitter issues.
+**Cycle jitter below 50 μs (microseconds) under realistic load is recommended**;
+consider the maximum observed value when evaluating results. A LinuxCNC image does
+not guarantee that every hardware configuration meets this target, and this value
+is not a safety acceptance criterion for real machinery.
 
-遇到安装或运行问题，请通过本仓库 Issues 反馈。
+Report installation or runtime problems through this repository's Issues.
 
-### 依赖安装
+### Installing dependencies
 
-- **IgH 必须自行安装，SIM 模式也不例外。** 在安装 Omni CNC 前，准备与系统内核、
-  CPU 架构及平台匹配的 IgH EtherCAT Master 和相关依赖，包括
-  `ethercat-master`、`libethercat-dev`，或提供相应工具、头文件和库的等效安装。
-- **除 IgH 外的其他运行依赖，由 DEB 安装流程自动检测并安装。**
-  请保持网络连接和对应系统的 APT 软件源可用。
-- DEB 不自动安装 IgH，也不安装实时内核、绑定网卡或配置从站。
-  安装 IgH 依赖不需要连接真实总线设备，当前版本仍严禁连接实机。
+- **You must install IgH yourself, including for SIM mode.** Before installing
+  Omni CNC, prepare an IgH EtherCAT Master and dependencies matching your kernel,
+  CPU architecture, and platform. These include `ethercat-master` and
+  `libethercat-dev`, or an equivalent installation providing the required tools,
+  headers, and libraries.
+- **The DEB installation process automatically checks and installs other runtime
+  dependencies.** Keep your network connection and the appropriate APT repositories available.
+- The DEB does not automatically install IgH or a real-time kernel, bind a network
+  adapter, or configure slaves. Installing IgH dependencies does not require real
+  fieldbus devices. Connecting real machinery remains strictly prohibited.
 
-## 安装步骤
+## Installation
 
-### 1. 确认系统与 IgH 已准备好
+### 1. Prepare the operating system and IgH
 
-先按上面的说明安装系统和 IgH。ARM 板卡需要使用匹配板卡的镜像，
-不能使用 x86 PC 的 ISO，也不能直接套用其他 ARM 板卡的镜像。
+Install the OS and IgH as described above. ARM boards require an OS image matching
+the board. Do not use an x86 PC ISO or assume that another ARM board's image is compatible.
 
-### 2. 选择安装包
+### 2. Choose a package
 
-从[本仓库](https://gitee.com/zhangqiangsam/omni-cnc)的发布附件或版本目录下载 DEB，
-并阅读同版本发布说明。请选择同时匹配以下信息的安装包：
+Download a DEB from the release attachments or version directories in
+[this repository](https://github.com/zhangqiangauto/omni-cnc), and read the release
+notes for that version. Choose a package matching all of the following:
 
-- 发行版及版本，例如 Debian 12、Debian 13 或对应的 Ubuntu 版本。
-- CPU 架构：`amd64` 或 `arm64`。
-- 硬件平台：`generic` 或发布说明指定的平台。
+- Distribution and version, such as Debian 12, Debian 13, or the corresponding Ubuntu version.
+- CPU architecture: `amd64` or `arm64`.
+- Hardware platform: `generic` or a platform specified in the release notes.
 
-包文件名一般为：
+Package filenames generally follow this pattern:
 
 ```text
-keniucnc_<版本>_<发行版>_<硬件平台>_<架构>.deb
+keniucnc_<version>_<distribution>_<hardware-platform>_<architecture>.deb
 ```
 
-发行版版本以镜像实际使用的系统为准，不是 LinuxCNC 应用的版本号。
-不同发行版、系统版本或架构的包不能混用。平台专用包可能依赖特定 CPU 指令集，
-不要仅因架构相同就安装到其他设备。
+The distribution version refers to the OS actually used by the image, not the
+LinuxCNC application's version. Packages for different distributions, OS versions,
+or architectures are not interchangeable. Platform-specific packages may require
+particular CPU instruction sets; matching the architecture alone is insufficient.
 
-如需核对本机系统与架构，可执行：
+Check your OS and architecture with:
 
 ```bash
 cat /etc/os-release
 dpkg --print-architecture
 ```
 
-### 3. 检查并安装 DEB
+### 3. Inspect and install the DEB
 
-在安装包所在目录打开终端，将文件名替换为实际下载的文件名：
+Open a terminal in the directory containing the package and replace the filename
+below with the actual downloaded filename:
 
 ```bash
-DEB_FILE='./实际下载的安装包文件名.deb'
+DEB_FILE='./your-downloaded-package.deb'
 dpkg-deb --field "$DEB_FILE" Package Version Architecture Depends
 sha256sum "$DEB_FILE"
 ```
 
-核对包名为 `keniucnc`，版本和架构与下载目标一致；如发布说明提供 SHA-256 校验值，
-请与计算结果比对。确认后，在同一终端执行：
+Verify that the package name is `keniucnc` and that the version and architecture
+match your intended download. If the release notes provide a SHA-256 checksum,
+compare it with the calculated value. Then run in the same terminal:
 
 ```bash
 sudo apt update
 sudo apt install "$DEB_FILE"
 ```
 
-安装流程会处理除 IgH 外的其他运行依赖。若出现依赖无法满足或其他错误，
-请保留完整报错并提交 Issue，不要强制忽略依赖。
+Installation handles runtime dependencies other than IgH. If dependencies cannot
+be satisfied or another error occurs, retain the complete error message and open
+an Issue. Do not force installation while ignoring dependencies.
 
-### 4. 启动并体验仿真
+### 4. Launch and explore simulation
 
-产品名为 Omni CNC，当前安装包、命令和桌面入口仍使用 `keniucnc` / **KeniuCNC** 名称。
+The product is named Omni CNC, while packages, commands, and desktop entries
+currently retain the `keniucnc` / **KeniuCNC** names.
 
-1. 从桌面应用菜单打开 **KeniuCNC 系统配置**，确认平台、机型与 **SIM** 运行模式。
-   工厂默认模板为通用 x86 五轴机型；ARM 设备尤其需要核对平台选择。
-2. 应用配置并退出向导后，从菜单主动打开 **KeniuCNC**。配置完成不会自动启动主程序。
-3. 确认处于 SIM 模式，再打开示例程序，体验轨迹预览、坐标、报警和仿真操作。
+1. Open **KeniuCNC System Configuration** (KeniuCNC 系统配置) from the desktop
+   applications menu. Check the platform, machine type, and **SIM** operating mode.
+   The factory template is a generic x86 five-axis machine; check the platform
+   selection especially carefully on ARM devices.
+2. Apply the configuration, exit the wizard, and manually open **KeniuCNC** from
+   the menu. Completing configuration does not automatically start the main application.
+3. Confirm SIM mode, then open a sample program to explore toolpath previews,
+   coordinates, alarms, and simulated operations.
 
-若启动时自动进入初始化向导，同样应先完成配置，再主动打开主程序。
-请使用当前登录的普通桌面账户，**不要用 `sudo` 启动界面**。
-也可在图形桌面的终端执行 `keniucnc-launcher`。
+If the initialization wizard opens automatically at startup, complete configuration
+first, then manually open the main application. Use your normal logged-in desktop
+account. **Do not launch the interface with `sudo`.** You can also run
+`keniucnc-launcher` in a terminal within the graphical desktop.
 
-用户程序目录为 `~/keniucnc/programs`，首次启动会补充缺失的示例程序，不覆盖已有同名文件。
-安装包包含桌面会话自启动入口；登录桌面后可能自动启动应用，可在桌面的自启动设置中管理。
+User programs are stored in `~/keniucnc/programs`. On first launch, missing sample
+programs are added without overwriting existing files of the same name. The package
+includes a desktop-session autostart entry, so the application may start when you
+log in. Manage this entry in your desktop's autostart settings.
 
-## Web 访问
+## Web access
 
-先从桌面启动 **KeniuCNC**，等待应用与 Web 服务启动后，再在浏览器中打开：
+Start **KeniuCNC** from the desktop and wait for the application and Web service
+to start, then open the appropriate address in a browser:
 
-| 访问位置 | 地址 |
+| Access location | Address |
 | --- | --- |
-| 运行 Omni CNC 的电脑本机 | [http://127.0.0.1:8080](http://127.0.0.1:8080) |
-| 同一电脑的另一种写法 | [http://localhost:8080](http://localhost:8080) |
-| 同一局域网中的其他电脑或平板 | `http://运行 Omni CNC 的电脑IP:8080` |
+| The computer running Omni CNC | [http://127.0.0.1:8080](http://127.0.0.1:8080) |
+| Alternative on the same computer | [http://localhost:8080](http://localhost:8080) |
+| Another computer or tablet on the same LAN | `http://<Omni-CNC-computer-IP>:8080` |
 
-例如，运行 Omni CNC 的电脑 IP 为 `192.168.1.100` 时，其他设备访问
-`http://192.168.1.100:8080`。这是地址示例，请替换为你自己的 IP。
-可在运行 Omni CNC 的电脑上执行以下命令查看 IP，选择与访问设备处于同一局域网的地址：
+For example, if the computer running Omni CNC has IP address `192.168.1.100`, other
+devices can use `http://192.168.1.100:8080`. Replace this example with your own IP.
+Run the following on the Omni CNC computer and choose an address on the same LAN
+as the device accessing it:
 
 ```bash
 hostname -I
 ```
 
-`127.0.0.1` 和 `localhost` 始终指向浏览器所在的设备，不能用来访问另一台电脑。
-默认 Web 端口为 **8080**；若平台配置已调整端口，请使用实际端口。
-加工台页面可直接通过 `http://运行 Omni CNC 的电脑IP:8080/#control` 打开。
+`127.0.0.1` and `localhost` always refer to the device running the browser; they
+cannot be used to access a different computer. The default Web port is **8080**.
+If the platform configuration changes it, use the configured port. Open the control
+page directly at `http://<Omni-CNC-computer-IP>:8080/#control`.
 
-局域网访问需要 Web 服务监听对应网络地址，且网络与防火墙允许访问该端口。
-仅限可信局域网使用，不要将控制接口直接暴露到互联网；所有体验仍须保持 SIM 模式。
-若无法访问，请先确认主程序已启动，核对 IP、端口及网络连通性，并通过
-[Issues](https://gitee.com/zhangqiangsam/omni-cnc/issues)反馈报错或浏览器截图。
+LAN access requires the Web service to listen on the appropriate network address
+and the network and firewall to allow the port. Use only on a trusted LAN; do not
+expose the control interface directly to the Internet. Keep all evaluation in SIM
+mode. If access fails, confirm that the main application is running and check the
+IP, port, and network connectivity. Report errors or browser screenshots through
+[Issues](https://github.com/zhangqiangauto/omni-cnc/issues).
 
-项目下载与版本说明见[仓库首页](https://gitee.com/zhangqiangsam/omni-cnc)，
-安装和使用问题统一提交到 [Issues](https://gitee.com/zhangqiangsam/omni-cnc/issues)。
+See the [repository](https://github.com/zhangqiangauto/omni-cnc) for downloads and
+release notes. Submit installation and usage questions through
+[Issues](https://github.com/zhangqiangauto/omni-cnc/issues).
 
-## 升级与备份
+## Upgrades and backups
 
-升级前退出仿真任务和应用，备份以下数据：
+Before upgrading, stop simulation tasks, exit the application, and back up:
 
-| 路径 | 内容 |
+| Path | Contents |
 | --- | --- |
-| `/etc/keniucnc` | 系统与机型配置 |
-| `/var/lib/keniucnc` | 持久状态、刀具与作业相关数据 |
-| `/var/log/keniucnc` | 日志、系统事件及操作记录 |
-| `~/keniucnc/programs` | 当前用户的程序，多用户环境需分别备份 |
+| `/etc/keniucnc` | System and machine configuration |
+| `/var/lib/keniucnc` | Persistent state and tool/job data |
+| `/var/log/keniucnc` | Logs, system events, and operation records |
+| `~/keniucnc/programs` | Programs for the current user; back up separately for each user |
 
-下载匹配的新包后，按上述安装步骤设置新包路径并执行 `sudo apt install "$DEB_FILE"`。
-升级后主动重新启动，核对配置并继续在 SIM 模式下使用。
+Download a matching new package, set its path as described above, and run
+`sudo apt install "$DEB_FILE"`. After upgrading, manually restart the application,
+check the configuration, and continue using SIM mode.
 
-## 卸载步骤
+## Uninstallation
 
-退出应用并备份需要保留的数据后，选择以下一种方式。
+Exit the application and back up any data you need before choosing one of the following.
 
-**普通卸载：**
+**Standard removal:**
 
 ```bash
 sudo apt remove keniucnc
 ```
 
-移除当前包和启动入口，保留发布副本、用户数据及缓存。
+Removes the current package and launch entries while retaining release copies,
+user data, and caches.
 
-**清除软件及发布副本：**
+**Purge the software and release copies:**
 
 ```bash
 sudo apt purge keniucnc
 ```
 
-在普通卸载的基础上，删除 `/opt/keniucnc/current`、`/opt/keniucnc/releases`
-和 `/var/cache/keniucnc`。
+In addition to standard removal, deletes `/opt/keniucnc/current`,
+`/opt/keniucnc/releases`, and `/var/cache/keniucnc`.
 
-两种方式都保留 `/etc/keniucnc`、`/var/lib/keniucnc`、`/var/log/keniucnc`
-以及各用户的 `~/keniucnc/programs`。**`purge` 不会删除全部用户数据。**
-卸载 Omni CNC 不会一并卸载 LinuxCNC、实时内核或单独安装的 IgH。
+Both methods retain `/etc/keniucnc`, `/var/lib/keniucnc`, `/var/log/keniucnc`, and
+each user's `~/keniucnc/programs`. **`purge` does not delete all user data.**
+Uninstalling Omni CNC does not uninstall LinuxCNC, the real-time kernel, or
+separately installed IgH components.
 
-## 问题反馈
+## Reporting problems
 
-安装失败、无法启动、界面异常或其他问题，请提交到：
+Report installation failures, startup failures, interface issues, and other problems at:
 
-**[Omni CNC Issues](https://gitee.com/zhangqiangsam/omni-cnc/issues)**
+**[Omni CNC Issues](https://github.com/zhangqiangauto/omni-cnc/issues)**
 
-为便于定位，请尽量附上：
+Please include, where possible:
 
-- 软件版本和完整安装包名。
-- 镜像来源、系统版本、CPU 架构、内存和内核版本。
-- 复现步骤、完整报错及相关日志。
-- 涉及周期抖动时，附测量工具、负载条件和测量结果。
+- Software version and full package filename.
+- OS image source, OS version, CPU architecture, memory, and kernel version.
+- Steps to reproduce, complete error messages, and relevant logs.
+- For cycle-jitter issues, the measurement tool, load conditions, and results.
 
-可使用以下命令查看已安装版本、内核和关键日志：
+Check the installed version, kernel, and key logs with:
 
 ```bash
 dpkg-query -W keniucnc
@@ -263,9 +308,12 @@ journalctl -t keniucnc -b --no-pager
 journalctl -t keniucnc-launcher -b --no-pager
 ```
 
-应用日志位于 `/var/log/keniucnc`。公开提交日志前，请删除密钥、个人资料和设备敏感信息。
+Application logs are in `/var/log/keniucnc`. Remove keys, personal information, and
+sensitive device information before publishing logs.
 
-## 许可说明
+## Licensing
 
-本仓库公开提供下载与交流，公开访问不等于采用开源许可证或授予任意再分发权。
-软件及第三方组件的使用、复制和分发，以对应版本的许可协议与版权声明为准。
+This repository is publicly available for downloads and discussion. Public access
+does not imply an open-source license or unrestricted redistribution rights.
+Use, copying, and distribution of the software and third-party components are
+subject to the license agreements and copyright notices for the corresponding release.
